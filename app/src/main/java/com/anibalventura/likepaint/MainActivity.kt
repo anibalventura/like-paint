@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var colorTag: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Set theme after splash screen.
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

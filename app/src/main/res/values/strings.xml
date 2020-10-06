@@ -5,4 +5,11 @@
     <string name="brush_large">Brush Large</string>
     <string name="brush_icon">Brush Icon</string>
     <string name="color_palette">Color Palette</string>
+    <string name="image_background">Image Background</string>
+    <string name="gallery_icon">image_icon</string>
+    <string name="gallery_permission">Need permission to add an image.</string>
+    <string name="storage_permission_granted">Permission granted, now you can read storage files.</string>
+    <string name="storage_permission_denied">You just denied the permission.</string>
+    <string name="error_parsing">Error parsing image or it\'s corrupted.</string>
+    <string name="undo_icon">Undo Icon</string>
 </resources>

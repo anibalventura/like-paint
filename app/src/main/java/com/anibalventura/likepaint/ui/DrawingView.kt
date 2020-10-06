@@ -1,4 +1,4 @@
-package com.anibalventura.likepaint
+package com.anibalventura.likepaint.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -18,6 +18,7 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
     private var brushColor = Color.BLACK
     private var canvas: Canvas? = null
     private var paths = ArrayList<CustomPath>()
+    private var undoPaths = ArrayList<CustomPath>()
 
     init {
         setUpDrawing()
@@ -128,6 +129,15 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
     fun setBrushColor(newColor: String) {
         brushColor = Color.parseColor(newColor)
         drawPaint!!.color = brushColor
+    }
+
+    fun undoDrawing() {
+        when {
+            paths.size > 0 -> {
+                undoPaths.add(paths.removeAt(paths.size - 1))
+                invalidate()
+            }
+        }
     }
 
     // An inner class for custom path with two params as color and stroke size.

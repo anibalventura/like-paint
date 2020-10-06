@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 
@@ -14,8 +15,9 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
     private var drawPaint: Paint? = null
     private var canvasPaint: Paint? = null
     private var brushSize: Float = 0.toFloat()
-    private var color = Color.BLACK
+    private var brushColor = Color.BLACK
     private var canvas: Canvas? = null
+    private var paths = ArrayList<CustomPath>()
 
     init {
         setUpDrawing()
@@ -27,17 +29,15 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
      */
     private fun setUpDrawing() {
         drawPaint = Paint()
-        drawPath = CustomPath(color, brushSize)
+        drawPath = CustomPath(brushColor, brushSize)
 
-        drawPaint!!.color = color
+        drawPaint!!.color = brushColor
 
         drawPaint!!.style = Paint.Style.STROKE
         drawPaint!!.strokeJoin = Paint.Join.ROUND
         drawPaint!!.strokeCap = Paint.Cap.ROUND
 
         canvasPaint = Paint(Paint.DITHER_FLAG)
-
-        brushSize = 20.toFloat()
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -67,6 +67,12 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
          */
         canvas!!.drawBitmap(canvasBitmap!!, 0f, 0f, canvasPaint)
 
+        for (path in paths) {
+            drawPaint!!.strokeWidth = path.brushThickness
+            drawPaint!!.color = path.color
+            canvas.drawPath(path, drawPaint!!)
+        }
+
         if (!drawPath!!.isEmpty) {
             drawPaint!!.strokeWidth = drawPath!!.brushThickness
             drawPaint!!.color = drawPath!!.color
@@ -85,7 +91,7 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
 
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                drawPath!!.color = color
+                drawPath!!.color = brushColor
                 drawPath!!.brushThickness = brushSize
 
                 // Clear any lines and curves from the path, making it empty.
@@ -97,12 +103,31 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
                 // Add a line from the last point to the specified point (x,y).
                 drawPath!!.lineTo(touchX, touchY)
             }
-            MotionEvent.ACTION_UP -> drawPath = CustomPath(color, brushSize)
+            MotionEvent.ACTION_UP -> {
+                paths.add(drawPath!!)
+                drawPath = CustomPath(brushColor, brushSize)
+            }
             else -> return false
         }
 
         invalidate()
         return true
+    }
+
+    // Set brush size from screen dimension.
+    fun setBrushSize(newSize: Float) {
+        brushSize = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            newSize,
+            resources.displayMetrics
+        )
+        drawPaint!!.strokeWidth = brushSize
+        drawPaint!!.color = brushColor
+    }
+
+    fun setBrushColor(newColor: String) {
+        brushColor = Color.parseColor(newColor)
+        drawPaint!!.color = brushColor
     }
 
     // An inner class for custom path with two params as color and stroke size.

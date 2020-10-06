@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Like Paint</string>
+    <string name="brush_small">Brush Small</string>
+    <string name="brush_medium">Brush Medium</string>
+    <string name="brush_large">Brush Large</string>
+    <string name="brush_icon">Brush Icon</string>
+    <string name="color_palette">Color Palette</string>
 </resources>

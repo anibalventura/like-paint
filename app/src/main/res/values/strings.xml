@@ -1,17 +1,18 @@
 <resources>
     <string name="app_name">Like Paint</string>
-    <string name="brush_small">Brush Small</string>
-    <string name="brush_medium">Brush Medium</string>
-    <string name="brush_large">Brush Large</string>
-    <string name="brush_icon">Brush Icon</string>
+    <string name="brush_size_small">Brush Size Small</string>
+    <string name="brush_size_medium">Brush Size Medium</string>
+    <string name="brush_size_large">Brush Size Large</string>
+    <string name="brush_button">Brush Button</string>
     <string name="color_palette">Color Palette</string>
     <string name="image_background">Image Background</string>
-    <string name="gallery_icon">image_icon</string>
+    <string name="add_image_button">Add Image Button</string>
     <string name="gallery_permission">Need permission to add an image.</string>
     <string name="storage_permission_granted">Permission granted, now you can read storage files.</string>
     <string name="storage_permission_denied">You just denied the permission.</string>
     <string name="error_parsing">Error parsing image or it\'s corrupted.</string>
-    <string name="undo_icon">Undo Icon</string>
-    <string name="save_icon">Save Icon</string>
-    <string name="share_icon">Share Icon</string>
+    <string name="undo_draw_button">Undo Draw Button</string>
+    <string name="save_drawing_button">Save Drawing Button</string>
+    <string name="share_drawing_button">Share Drawing Button</string>
+    <string name="erase_draw_button">Erase Draw Button</string>
 </resources>

@@ -12,4 +12,6 @@
     <string name="storage_permission_denied">You just denied the permission.</string>
     <string name="error_parsing">Error parsing image or it\'s corrupted.</string>
     <string name="undo_icon">Undo Icon</string>
+    <string name="save_icon">Save Icon</string>
+    <string name="share_icon">Share Icon</string>
 </resources>

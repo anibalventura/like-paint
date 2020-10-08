@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/image_background"
-            android:scaleType="centerCrop" />
+            android:scaleType="fitCenter" />
 
         <com.anibalventura.likepaint.ui.DrawingView
             android:id="@+id/drawingView"
@@ -178,6 +178,26 @@
             android:padding="5dp"
             android:scaleType="fitXY"
             android:src="@drawable/ic_gallery" />
+
+        <ImageButton
+            android:id="@+id/ibSaveDrawing"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/save_icon"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_save" />
+
+        <ImageButton
+            android:id="@+id/ibShareDrawing"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/share_icon"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_share" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

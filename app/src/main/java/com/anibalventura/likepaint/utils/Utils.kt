@@ -33,7 +33,7 @@ fun toast(context: Context, message: Int) {
 }
 
 /** ============================= Share text. ============================= **/
-fun share(context: Context, message: String) {
+fun shareText(context: Context, message: String) {
     // Create the intent.
     val sendIntent: Intent = Intent().apply {
         action = Intent.ACTION_SEND

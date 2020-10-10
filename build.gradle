@@ -6,7 +6,7 @@ buildscript {
         archLifecycle_version = '2.2.0'
         navigation_version = '2.3.0'
         material_dialogs_version = '3.3.0'
-        gradle_version = '4.0.1'
+        gradle_version = '4.0.2'
         dataBindingCompiler_version = gradle_version // Always need to be the same.
     }
     repositories {
@@ -14,7 +14,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.0.1"
+        classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong

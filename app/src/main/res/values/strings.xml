@@ -12,7 +12,14 @@
     <string name="storage_permission_denied">You just denied the permission.</string>
     <string name="error_parsing">Error parsing image or it\'s corrupted.</string>
     <string name="undo_draw_button">Undo Draw Button</string>
-    <string name="save_drawing_button">Save Drawing Button</string>
-    <string name="share_drawing_button">Share Drawing Button</string>
+    <string name="option_save_drawing">Save Drawing</string>
+    <string name="option_share_drawing">Share Drawing</string>
     <string name="erase_draw_button">Erase Draw Button</string>
+    <string name="options_menu">Options Menu</string>
+    <string name="brush_color_button">Brush Color Button</string>
+    <string name="dialog_choose_color">Choose Color</string>
+    <string name="dialog_select">Select</string>
+    <string name="dialog_negative">Cancel</string>
+    <string name="redo_draw_button">Redo Draw Button</string>
+    <string name="dialog_choose_size">Choose size</string>
 </resources>

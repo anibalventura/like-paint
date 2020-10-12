@@ -1,19 +1,13 @@
 <resources>
     <string name="app_name">Like Paint</string>
-    <string name="brush_size_small">Brush Size Small</string>
-    <string name="brush_size_medium">Brush Size Medium</string>
-    <string name="brush_size_large">Brush Size Large</string>
     <string name="brush_button">Brush Button</string>
     <string name="color_palette">Color Palette</string>
     <string name="image_background">Image Background</string>
-    <string name="add_image_button">Add Image Button</string>
-    <string name="gallery_permission">Need permission to add an image.</string>
-    <string name="storage_permission_granted">Permission granted, now you can read storage files.</string>
-    <string name="storage_permission_denied">You just denied the permission.</string>
+    <string name="background_image_button">Image Button</string>
     <string name="error_parsing">Error parsing image or it\'s corrupted.</string>
     <string name="undo_draw_button">Undo Draw Button</string>
     <string name="option_save_drawing">Save Drawing</string>
-    <string name="option_share_drawing">Share Drawing</string>
+    <string name="share_drawing_button">Share Drawing Button</string>
     <string name="erase_draw_button">Erase Draw Button</string>
     <string name="options_menu">Options Menu</string>
     <string name="brush_color_button">Brush Color Button</string>
@@ -22,4 +16,13 @@
     <string name="dialog_negative">Cancel</string>
     <string name="redo_draw_button">Redo Draw Button</string>
     <string name="dialog_choose_size">Choose size</string>
+    <string name="brush_small">Small</string>
+    <string name="brush_medium">Medium</string>
+    <string name="brush_large">Large</string>
+    <string name="arrow_right_button">Arrow Right Button</string>
+    <string name="background_image_add">Add Image</string>
+    <string name="background_image_clear">Clear Image</string>
+    <string name="dialog_background_image">Background Image</string>
+    <string name="drawing_saved">Drawing saved on Pictures.</string>
+    <string name="share_drawing">Share Drawing</string>
 </resources>

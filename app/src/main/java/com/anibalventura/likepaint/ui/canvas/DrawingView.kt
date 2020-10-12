@@ -1,22 +1,18 @@
-package com.anibalventura.likepaint.ui.drawing
+package com.anibalventura.likepaint.ui.canvas
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.graphics.*
 import android.net.Uri
-import android.os.Environment
 import android.provider.MediaStore
 import android.util.AttributeSet
-import android.util.Log
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
 import java.io.OutputStream
 
 class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) {
-
 
     private var canvas: Canvas? = null
     private var canvasBitmap: Bitmap? = null
@@ -28,8 +24,7 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
     private var paths = ArrayList<CustomPath>()
     private var undonePaths = ArrayList<CustomPath>()
 
-    private var brushSize: Float = 10.toFloat()
-    private var eraserSize: Float = 10.toFloat()
+    private var brushSize: Float = 20F
     private var brushColor: Int = Color.BLACK
 
     lateinit var result: String
@@ -64,18 +59,6 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        /**
-         * Draw the specified bitmap, with its top/left corner at (x,y), using the specified paint,
-         * transformed by the current matrix.
-         *
-         *If the bitmap and canvas have different densities, this function will take care of
-         * automatically scaling the bitmap to draw at the same density as the canvas.
-         *
-         * @param bitmap The bitmap to be drawn
-         * @param left The position of the left side of the bitmap being drawn
-         * @param top The position of the top side of the bitmap being drawn
-         * @param paint The paint used to draw the bitmap (may be null)
-         */
         canvas!!.drawBitmap(canvasBitmap!!, 0f, 0f, canvasPaint)
 
         for (path in paths) {
@@ -104,7 +87,6 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
             MotionEvent.ACTION_DOWN -> {
                 drawPath!!.color = brushColor
                 drawPath!!.brushThickness = brushSize
-
                 // Clear any lines and curves from the path, making it empty.
                 drawPath!!.reset()
                 // Set the beginning of the next contour to the point (x,y).
@@ -125,32 +107,20 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
         return true
     }
 
-    fun setBrushSize(newSize: Float) {
+    fun setBrushSize(size: Float): Float {
         // Set size based on screen dimension.
         brushSize = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            newSize,
+            TypedValue.COMPLEX_UNIT_DIP, size,
             resources.displayMetrics
         )
-
         drawPaint!!.strokeWidth = brushSize
-        drawPaint!!.color = brushColor
+
+        return brushSize
     }
 
     fun setBrushColor(newColor: Int) {
         brushColor = newColor
         drawPaint!!.color = brushColor
-    }
-
-    fun setEraserSize(newSize: Float) {
-        // Set size based on screen dimension.
-        eraserSize = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            newSize,
-            resources.displayMetrics
-        )
-
-        drawPaint!!.strokeWidth = eraserSize
     }
 
     fun undoPath() {
@@ -171,13 +141,15 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
         }
     }
 
+    fun clearDrawing() {
+        drawPath?.reset() // Avoiding saving redo from Path()
+        paths.clear()
+        invalidate()
+    }
+
     fun saveBitmap(bitmap: Bitmap): String {
         val resolver = context.contentResolver
         val fileName = "LikePaint_${System.currentTimeMillis() / 1000}.png"
-        val saveLocation = Environment.DIRECTORY_PICTURES
-
-        Toast.makeText(context, "Drawing saved on: $saveLocation", Toast.LENGTH_LONG)
-            .show()
 
         val values = ContentValues()
         values.put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
@@ -185,7 +157,6 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
         values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
 
         val uri: Uri? = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-
         if (uri != null) {
             saveDrawingToStream(bitmap, resolver.openOutputStream(uri))
             context.contentResolver.update(uri, values, null, null)
@@ -216,7 +187,6 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
                 bitmap.compress(Bitmap.CompressFormat.PNG, 90, outputStream)
                 outputStream.close()
             } catch (e: Exception) {
-                Log.e("**Exception", "Could not write to stream")
                 e.printStackTrace()
             }
         }

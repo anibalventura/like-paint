@@ -20,7 +20,7 @@
             <item
                 android:id="@+id/option_share_drawing"
                 android:icon="@drawable/ic_share"
-                android:title="@string/option_share_drawing"
+                android:title="@string/share_drawing_button"
                 app:showAsAction="never" />
         </menu>
 

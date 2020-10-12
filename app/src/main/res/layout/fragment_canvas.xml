@@ -6,8 +6,12 @@
     <data>
 
         <variable
+            name="canvas"
+            type="com.anibalventura.likepaint.ui.canvas.CanvasFragment" />
+
+        <variable
             name="drawing"
-            type="com.anibalventura.likepaint.ui.drawing.CanvasFragment" />
+            type="com.anibalventura.likepaint.ui.canvas.DrawingView" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +26,7 @@
             android:layout_margin="5dp"
             android:background="@drawable/bg_drawing_view"
             android:padding="1dp"
-            app:layout_constraintBottom_toTopOf="@+id/cvPanel"
+            app:layout_constraintBottom_toTopOf="@+id/cvToolsPanel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,7 +39,7 @@
                 android:contentDescription="@string/image_background"
                 android:scaleType="fitCenter" />
 
-            <com.anibalventura.likepaint.ui.drawing.DrawingView
+            <com.anibalventura.likepaint.ui.canvas.DrawingView
                 android:id="@+id/drawingView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -44,7 +48,7 @@
         </FrameLayout>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cvPanel"
+            android:id="@+id/cvToolsPanel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -60,106 +64,155 @@
             app:layout_constraintTop_toBottomOf="@+id/flDrawingViewContainer">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/clActionButtons"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-                <ImageButton
-                    android:id="@+id/ibBrushSize"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/brush_button"
-                    android:longClickable="true"
-                    android:onClick="@{() -> drawing.brush()}"
-                    android:padding="8dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_brush"
+                <HorizontalScrollView
+                    android:id="@+id/hsvRight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:scrollbarSize="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ibEraseDraw"
-                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintEnd_toStartOf="@+id/ibMoveRight"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/ibBrushSize"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="4dp"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/brush_button"
+                            android:longClickable="true"
+                            android:onClick="@{() -> canvas.brush()}"
+                            android:padding="8dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_brush" />
+
+                        <ImageButton
+                            android:id="@+id/ibEraseDraw"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="4dp"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/erase_draw_button"
+                            android:longClickable="true"
+                            android:onClick="@{() -> canvas.eraser()}"
+                            android:padding="8dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_eraser" />
+
+                        <ImageButton
+                            android:id="@+id/ibUndoDraw"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="4dp"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/undo_draw_button"
+                            android:onClick="@{() -> drawing.undoPath()}"
+                            android:padding="8dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_undo" />
+
+                        <ImageButton
+                            android:id="@+id/ibRedoDraw"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="4dp"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/redo_draw_button"
+                            android:onClick="@{() -> drawing.redoPath()}"
+                            android:padding="8dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_redo" />
+
+                        <ImageButton
+                            android:id="@+id/ibBrushColor"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="4dp"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/brush_color_button"
+                            android:onClick="@{() -> canvas.brushColor()}"
+                            android:padding="8dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_palette" />
+
+                        <ImageButton
+                            android:id="@+id/ibBackgroundImage"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="4dp"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/background_image_button"
+                            android:onClick="@{() -> canvas.imageBackground()}"
+                            android:padding="8dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_image" />
+
+                        <ImageButton
+                            android:id="@+id/ibClearCanvas"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="4dp"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/brush_color_button"
+                            android:onClick="@{() -> drawing.clearDrawing()}"
+                            android:padding="8dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_clear" />
+
+                        <ImageButton
+                            android:id="@+id/ibShareDrawing"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="4dp"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/share_drawing_button"
+                            android:onClick="@{() -> canvas.shareDrawing()}"
+                            android:padding="8dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_share" />
+
+                    </LinearLayout>
+                </HorizontalScrollView>
 
                 <ImageButton
-                    android:id="@+id/ibRedoDraw"
+                    android:id="@+id/ibMoveRight"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/redo_draw_button"
-                    android:onClick="@{() -> drawing.redoDraw()}"
+                    android:background="#C4C4C4"
+                    android:contentDescription="@string/arrow_right_button"
+                    android:onClick="@{() -> canvas.moveScroll(0)}"
                     android:padding="8dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_redo"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ibAddImage"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/ibUndoDraw"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/ibUndoDraw"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/undo_draw_button"
-                    android:onClick="@{() -> drawing.undoDraw()}"
-                    android:padding="8dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_undo"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ibRedoDraw"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/ibEraseDraw"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/ibEraseDraw"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/erase_draw_button"
-                    android:longClickable="true"
-                    android:onClick="@{() -> drawing.eraser()}"
-                    android:padding="8dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_eraser"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ibUndoDraw"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/ibBrushSize"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/ibAddImage"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/add_image_button"
-                    android:onClick="@{() -> drawing.addImage()}"
-                    android:padding="8dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_add_image"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ibBrushColor"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/ibRedoDraw"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/ibBrushColor"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/brush_color_button"
-                    android:onClick="@{() -> drawing.brushColor()}"
-                    android:padding="8dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_palette"
+                    android:src="@drawable/ic_arrow_right"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/ibAddImage"
+                    app:layout_constraintStart_toEndOf="@+id/hsvRight"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/ibMoveLeft"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="#C4C4C4"
+                    android:contentDescription="@string/arrow_right_button"
+                    android:onClick="@{() -> canvas.moveScroll(1)}"
+                    android:padding="8dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_arrow_left"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/hsvRight"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

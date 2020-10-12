@@ -3,14 +3,12 @@ package com.anibalventura.likepaint.utils
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.widget.Toast
+import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
-import com.anibalventura.likepaint.App
 import com.anibalventura.likepaint.utils.Constants.THEME
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
-
-val resources = App.resourses!!
 
 /** ========================== SharedPreferences. ========================== **/
 fun sharedPref(context: Context): SharedPreferences {
@@ -27,9 +25,10 @@ fun setupTheme(context: Context) {
     }
 }
 
-/** =========================== Toast message. =========================== **/
-fun toast(context: Context, message: Int) {
-    Toast.makeText(context, resources.getString(message), Toast.LENGTH_SHORT).show()
+/** =========================== SnackBar message. =========================== **/
+fun snackBarMsg(view: View, message: String) {
+    val snackBar = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+    snackBar.show()
 }
 
 /** ============================= Share text. ============================= **/

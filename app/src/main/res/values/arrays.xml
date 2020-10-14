@@ -1,0 +1,13 @@
+<resources>
+    <!-- Theme Preference -->
+    <string-array name="settings_theme_titles">
+        <item>@string/settings_theme_light</item>
+        <item>@string/settings_theme_dark</item>
+        <item>@string/settings_theme_default</item>
+    </string-array>
+    <string-array name="settings_theme_values">
+        <item>1</item>
+        <item>2</item>
+        <item>0</item>
+    </string-array>
+</resources>

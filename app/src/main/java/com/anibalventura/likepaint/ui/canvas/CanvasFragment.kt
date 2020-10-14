@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BasicGridItem
@@ -24,6 +25,7 @@ import com.afollestad.materialdialogs.list.listItems
 import com.anibalventura.likepaint.R
 import com.anibalventura.likepaint.databinding.FragmentCanvasBinding
 import com.anibalventura.likepaint.utils.Constants
+import com.anibalventura.likepaint.utils.shareText
 import com.anibalventura.likepaint.utils.snackBarMsg
 import kotlinx.android.synthetic.main.fragment_canvas.*
 import kotlinx.coroutines.launch
@@ -56,6 +58,8 @@ class CanvasFragment : Fragment() {
         return binding.root
     }
 
+    /* ===================================== Permissions ===================================== */
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when {
@@ -85,7 +89,14 @@ class CanvasFragment : Fragment() {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
             ), Constants.STORAGE_PERMISSION_CODE
         )
+
+        when (isReadStorageAllowed()) {
+            true -> snackBarMsg(requireView(), getString(R.string.permission_granted))
+            false -> snackBarMsg(requireView(), "Permission denied.")
+        }
     }
+
+    /* ===================================== Options Menu ===================================== */
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_canvas, menu)
@@ -94,10 +105,41 @@ class CanvasFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.option_save_drawing -> saveDrawing()
-            R.id.option_share_drawing -> shareDrawing()
+            R.id.option_tell_friends -> shareText(
+                requireContext(), getString(R.string.option_tell_friends_msg)
+            )
+            R.id.option_rate_app -> rateApp()
+            R.id.option_about -> findNavController().navigate(R.id.action_canvasFragment_to_aboutFragment)
+            R.id.option_settings -> findNavController().navigate(R.id.settingsActivity)
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun saveDrawing() {
+        when {
+            isReadStorageAllowed() ->
+                viewLifecycleOwner.lifecycleScope.launch {
+                    binding.drawingView.saveBitmap(
+                        binding.drawingView.getBitmap(flDrawingViewContainer)
+                    )
+                    snackBarMsg(requireView(), getString(R.string.drawing_saved))
+                }
+            else -> {
+                requestStoragePermission()
+                snackBarMsg(requireView(), getString(R.string.permission_granted))
+            }
+        }
+    }
+
+    private fun rateApp() {
+        val rateIntent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("https://play.google.com/store/apps/details?id=com.anibalventura.likepaint")
+        )
+        startActivity(Intent.createChooser(rateIntent, null))
+    }
+
+    /* ===================================== Tools Panel ===================================== */
 
     fun brush() {
         binding.drawingView.setBrushColor(brushColor)
@@ -162,8 +204,7 @@ class CanvasFragment : Fragment() {
 
     fun imageBackground() {
         val options = listOf(
-            getString(R.string.background_image_add),
-            getString(R.string.background_image_clear)
+            getString(R.string.background_image_add), getString(R.string.background_image_clear)
         )
 
         MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
@@ -173,11 +214,17 @@ class CanvasFragment : Fragment() {
                     0 -> {
                         when {
                             isReadStorageAllowed() -> {
-                                val pickPhotoIntent = Intent(
-                                    Intent.ACTION_PICK,
-                                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                                )
-                                startActivityForResult(pickPhotoIntent, Constants.GALLERY)
+                                try {
+                                    val pickPhotoIntent = Intent(
+                                        Intent.ACTION_PICK,
+                                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                                    )
+                                    startActivityForResult(pickPhotoIntent, Constants.GALLERY)
+                                } catch (e: Exception) {
+                                    snackBarMsg(
+                                        requireView(), getString(R.string.gallery_not_available)
+                                    )
+                                }
                             }
                             else -> requestStoragePermission()
                         }
@@ -212,19 +259,6 @@ class CanvasFragment : Fragment() {
                 binding.ibMoveLeft.visibility = View.INVISIBLE
                 binding.ibMoveRight.visibility = View.VISIBLE
             }
-        }
-    }
-
-    private fun saveDrawing() {
-        when {
-            isReadStorageAllowed() ->
-                viewLifecycleOwner.lifecycleScope.launch {
-                    binding.drawingView.saveBitmap(
-                        binding.drawingView.getBitmap(flDrawingViewContainer)
-                    )
-                    snackBarMsg(requireView(), getString(R.string.drawing_saved))
-                }
-            else -> requestStoragePermission()
         }
     }
 }

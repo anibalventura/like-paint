@@ -1,0 +1,13 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ListPreference
+        android:defaultValue="0"
+        android:dialogTitle="@string/settings_theme_choose"
+        android:entries="@array/settings_theme_titles"
+        android:entryValues="@array/settings_theme_values"
+        android:key="theme"
+        android:summary="@string/settings_theme_selected"
+        android:title="@string/settings_theme"
+        app:dialogIcon="@drawable/ic_theme"
+        app:icon="@drawable/ic_theme" />
+</PreferenceScreen>

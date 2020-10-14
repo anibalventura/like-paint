@@ -142,7 +142,7 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
     }
 
     fun clearDrawing() {
-        drawPath?.reset() // Avoiding saving redo from Path()
+        drawPath?.reset() // Avoiding saving redo from Path().
         paths.clear()
         invalidate()
     }

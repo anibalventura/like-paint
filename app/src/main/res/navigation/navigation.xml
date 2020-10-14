@@ -8,6 +8,30 @@
     <fragment
         android:id="@+id/canvasFragment"
         android:name="com.anibalventura.likepaint.ui.canvas.CanvasFragment"
-        android:label="CanvasFragment"
-        tools:layout="@layout/fragment_canvas" />
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_canvas">
+        <action
+            android:id="@+id/action_canvasFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@anim/animation_from_right"
+            app:exitAnim="@anim/animation_to_left"
+            app:popEnterAnim="@anim/animation_from_left"
+            app:popExitAnim="@anim/animation_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.anibalventura.likepaint.ui.about.AboutFragment"
+        android:label="@string/option_about"
+        tools:layout="@layout/fragment_about">
+        <action
+            android:id="@+id/action_aboutFragment_to_canvasFragment"
+            app:destination="@id/canvasFragment"
+            app:enterAnim="@anim/animation_from_left"
+            app:exitAnim="@anim/animation_to_right"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="com.anibalventura.likepaint.ui.settings.SettingsActivity"
+        tools:layout="@layout/activity_settings" />
 </navigation>

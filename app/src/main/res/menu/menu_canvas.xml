@@ -18,9 +18,24 @@
 
         <menu>
             <item
-                android:id="@+id/option_share_drawing"
-                android:icon="@drawable/ic_share"
-                android:title="@string/share_drawing_button"
+                android:id="@+id/option_tell_friends"
+                android:icon="@drawable/ic_share_ol"
+                android:title="@string/option_tell_friends"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/option_rate_app"
+                android:icon="@drawable/ic_rate"
+                android:title="@string/option_rate_app"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/option_about"
+                android:icon="@drawable/ic_about"
+                android:title="@string/option_about"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/option_settings"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/option_settings"
                 app:showAsAction="never" />
         </menu>
 

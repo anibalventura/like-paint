@@ -18,4 +18,11 @@
         <item name="colorControlNormal">@color/secondaryTextColor</item>
     </style>
 
+    <style name="PreferenceTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/secondaryTextColor</item>
+        <item name="colorPrimaryDark">@color/primaryColor</item>
+        <item name="colorControlActivated">@color/secondaryTextColor</item>
+        <item name="android:navigationBarColor">@color/primaryColor</item>
+    </style>
+
 </resources>

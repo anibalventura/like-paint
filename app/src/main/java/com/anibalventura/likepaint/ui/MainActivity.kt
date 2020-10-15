@@ -57,14 +57,14 @@ class MainActivity : AppCompatActivity() {
             this.window.statusBarColor = ActivityCompat.getColor(this, R.color.primaryColor)
 
             when (destination.id) {
-                R.id.canvasFragment -> showToolbarTitleOrUp(toolBar, true, false)
-                R.id.aboutFragment -> showToolbarTitleOrUp(toolBar, true, true)
+                R.id.canvasFragment -> showToolbarTitleOrUp(toolBar, false)
+                R.id.aboutFragment -> showToolbarTitleOrUp(toolBar, true)
             }
         }
     }
 
     private fun showToolbarTitleOrUp(
-        toolBar: ActionBar, showTitle: Boolean, showUpButton: Boolean
+        toolBar: ActionBar, showUpButton: Boolean, showTitle: Boolean = true
     ) {
         toolBar.setDisplayShowTitleEnabled(showTitle)
         toolBar.setDisplayHomeAsUpEnabled(showUpButton)

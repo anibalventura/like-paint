@@ -41,8 +41,6 @@ fun shareText(context: Context, message: String) {
     }
 
     // Send the intent.
-    context.let {
-        Intent(context, Dispatchers.Main::class.java)
-        context.startActivity(Intent.createChooser(sendIntent, null))
-    }
+    Intent(context, Dispatchers.Main::class.java)
+    context.startActivity(Intent.createChooser(sendIntent, null))
 }

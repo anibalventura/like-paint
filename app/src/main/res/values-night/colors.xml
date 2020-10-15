@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryColor">#282C34</color>
+    <color name="primaryDarkColor">#282C34</color>
+    <color name="primaryTextColor">#FFFFFF</color>
+    <color name="secondaryTextColor">#FFFFFF</color>
+    <color name="iconColor">#FFFFFF</color>
+    <color name="backgroundColor">#282C34</color>
+    <color name="ScrollMoveBgColor">#474A52</color>
+</resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="brush_button">Botón Pincel</string>
+    <string name="color_palette">Paleta de Colores</string>
+    <string name="image_background">Imagen de dondo</string>
+    <string name="background_image_button">Botón Imagen</string>
+    <string name="error_parsing">Error al analizar la imagen o está dañada.</string>
+    <string name="undo_draw_button">Botón Deshacer Dibujo</string>
+    <string name="option_save_drawing">Guardar Dibujo</string>
+    <string name="share_drawing_button">Botón Compartir Dibujo</string>
+    <string name="erase_draw_button">Botón Borrar Dibujo</string>
+    <string name="options_menu">Menú de Opciones</string>
+    <string name="brush_color_button">Botón Color de Pincel</string>
+    <string name="dialog_choose_color">Elegir color del pincel</string>
+    <string name="dialog_select">Seleccionar</string>
+    <string name="dialog_negative">Cancelar</string>
+    <string name="redo_draw_button">Botón Rehacer Dibujo</string>
+    <string name="dialog_choose_brush_size">Elegir tamaño del pincel</string>
+    <string name="brush_small">Pequeño</string>
+    <string name="brush_medium">Mediano</string>
+    <string name="brush_large">Grande</string>
+    <string name="arrow_right_button">Botón Felcha Derecha</string>
+    <string name="background_image_add">Añadir imagen de fondo</string>
+    <string name="background_image_clear">Eliminar imagen de fondo</string>
+    <string name="dialog_background_image">Imagen de fondo</string>
+    <string name="drawing_saved">Dibujo guardado en Imágenes.</string>
+    <string name="share_drawing">Compartir Dibujo</string>
+    <string name="option_tell_friends">Compartir App</string>
+    <string name="option_about">Acerca de</string>
+    <string name="option_settings">Ajustes</string>
+    <string name="gallery_not_available">App de Galeria no disponible.</string>
+    <string name="option_tell_friends_msg">Descarga ahora esta increíble aplicación para dibujar!\n\n
+        https://play.google.com/store/apps/details?id=com.anibalventura.likepaint</string>
+    <string name="option_rate_app">Calificar App</string>
+    <string name="settings_theme_light">Claro</string>
+    <string name="settings_theme_dark">Oscuro</string>
+    <string name="settings_theme_default">Determinado por el Sistema</string>
+    <string name="settings_theme_choose">Elegir un tema</string>
+    <string name="settings_theme_selected">Tema seleccionado</string>
+    <string name="settings_theme">Tema</string>
+    <string name="about_app_version">Versión 1.0.0</string>
+    <string name="about_changelog_title">Registro de Cambios</string>
+    <string name="about_changelog_v100_content">- Lanzamiento inicial.</string>
+    <string name="dialog_choose_eraser_size">Elegir tamaño del borrador</string>
+</resources>

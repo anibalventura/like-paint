@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Like Paint</string>
+    <string name="app_name" translatable="false">Like Paint</string>
     <string name="brush_button">Brush Button</string>
     <string name="color_palette">Color Palette</string>
-    <string name="image_background">Image Background</string>
+    <string name="image_background">Image background</string>
     <string name="background_image_button">Image Button</string>
     <string name="error_parsing">Error parsing image or it\'s corrupted.</string>
     <string name="undo_draw_button">Undo Draw Button</string>
@@ -11,18 +11,19 @@
     <string name="erase_draw_button">Erase Draw Button</string>
     <string name="options_menu">Options Menu</string>
     <string name="brush_color_button">Brush Color Button</string>
-    <string name="dialog_choose_color">Choose Color</string>
+    <string name="dialog_choose_color">Choose brush color</string>
     <string name="dialog_select">Select</string>
     <string name="dialog_negative">Cancel</string>
     <string name="redo_draw_button">Redo Draw Button</string>
-    <string name="dialog_choose_size">Choose size</string>
+    <string name="dialog_choose_brush_size">Choose brush size</string>
+    <string name="dialog_choose_eraser_size">Choose eraser size</string>
     <string name="brush_small">Small</string>
     <string name="brush_medium">Medium</string>
     <string name="brush_large">Large</string>
     <string name="arrow_right_button">Arrow Right Button</string>
-    <string name="background_image_add">Add Image</string>
-    <string name="background_image_clear">Clear Image</string>
-    <string name="dialog_background_image">Background Image</string>
+    <string name="background_image_add">Add image background</string>
+    <string name="background_image_clear">Clear image background</string>
+    <string name="dialog_background_image">Background image</string>
     <string name="drawing_saved">Drawing saved on Pictures.</string>
     <string name="share_drawing">Share Drawing</string>
     <string name="option_tell_friends">Tell Friends</string>
@@ -43,5 +44,4 @@
     <string name="about_changelog_title">Changelog</string>
     <string name="about_changelog_v100_title" translatable="false">v 1.0.0</string>
     <string name="about_changelog_v100_content">- First release.</string>
-    <string name="permission_granted">Permission granted.</string>
 </resources>

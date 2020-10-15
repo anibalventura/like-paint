@@ -25,6 +25,7 @@ import com.afollestad.materialdialogs.list.listItems
 import com.anibalventura.likepaint.R
 import com.anibalventura.likepaint.databinding.FragmentCanvasBinding
 import com.anibalventura.likepaint.utils.Constants
+import com.anibalventura.likepaint.utils.Constants.STORAGE_PERMISSION_CODE
 import com.anibalventura.likepaint.utils.shareText
 import com.anibalventura.likepaint.utils.snackBarMsg
 import kotlinx.android.synthetic.main.fragment_canvas.*
@@ -87,13 +88,8 @@ class CanvasFragment : Fragment() {
             requireActivity(), arrayOf(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ), Constants.STORAGE_PERMISSION_CODE
+            ), STORAGE_PERMISSION_CODE
         )
-
-        when (isReadStorageAllowed()) {
-            true -> snackBarMsg(requireView(), getString(R.string.permission_granted))
-            false -> snackBarMsg(requireView(), "Permission denied.")
-        }
     }
 
     /* ===================================== Options Menu ===================================== */
@@ -117,17 +113,8 @@ class CanvasFragment : Fragment() {
 
     private fun saveDrawing() {
         when {
-            isReadStorageAllowed() ->
-                viewLifecycleOwner.lifecycleScope.launch {
-                    binding.drawingView.saveBitmap(
-                        binding.drawingView.getBitmap(flDrawingViewContainer)
-                    )
-                    snackBarMsg(requireView(), getString(R.string.drawing_saved))
-                }
-            else -> {
-                requestStoragePermission()
-                snackBarMsg(requireView(), getString(R.string.permission_granted))
-            }
+            isReadStorageAllowed() -> saveBitmap()
+            else -> requestStoragePermission()
         }
     }
 
@@ -161,34 +148,13 @@ class CanvasFragment : Fragment() {
         }
     }
 
-    private fun showBrushSizeDialog() {
-        val sizes = listOf(
-            BasicGridItem(R.drawable.brush_small, getString(R.string.brush_small)),
-            BasicGridItem(R.drawable.brush_medium, getString(R.string.brush_medium)),
-            BasicGridItem(R.drawable.brush_large, getString(R.string.brush_large))
-        )
-
-        MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-            title(R.string.dialog_choose_size)
-            gridItems(sizes) { _, index, _ ->
-                when (index) {
-                    0 -> binding.drawingView.setBrushSize(5F)
-                    1 -> binding.drawingView.setBrushSize(10F)
-                    2 -> binding.drawingView.setBrushSize(20F)
-                }
-            }
-        }
-    }
-
     fun brushColor() {
         @Suppress("DEPRECATION")
         val colors = intArrayOf(
             Color.BLACK, Color.RED, Color.BLUE, Color.GREEN,
             Color.YELLOW, Color.MAGENTA, Color.GRAY, Color.CYAN,
-            resources.getColor(R.color.beige),
-            resources.getColor(R.color.orange),
-            resources.getColor(R.color.greenLight),
-            resources.getColor(R.color.purpleBlue)
+            resources.getColor(R.color.beige), resources.getColor(R.color.orange),
+            resources.getColor(R.color.greenLight), resources.getColor(R.color.purpleBlue)
         )
 
         MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
@@ -211,23 +177,9 @@ class CanvasFragment : Fragment() {
             title(R.string.dialog_background_image)
             listItems(items = options) { _, index, _ ->
                 when (index) {
-                    0 -> {
-                        when {
-                            isReadStorageAllowed() -> {
-                                try {
-                                    val pickPhotoIntent = Intent(
-                                        Intent.ACTION_PICK,
-                                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                                    )
-                                    startActivityForResult(pickPhotoIntent, Constants.GALLERY)
-                                } catch (e: Exception) {
-                                    snackBarMsg(
-                                        requireView(), getString(R.string.gallery_not_available)
-                                    )
-                                }
-                            }
-                            else -> requestStoragePermission()
-                        }
+                    0 -> when {
+                        isReadStorageAllowed() -> requestImage()
+                        else -> requestStoragePermission()
                     }
                     1 -> binding.ivBackground.setImageURI(null)
                 }
@@ -259,6 +211,46 @@ class CanvasFragment : Fragment() {
                 binding.ibMoveLeft.visibility = View.INVISIBLE
                 binding.ibMoveRight.visibility = View.VISIBLE
             }
+        }
+    }
+
+    /* ===================================== Tools Panel Utils ===================================== */
+
+    private fun showBrushSizeDialog() {
+        val sizes = listOf(
+            BasicGridItem(R.drawable.brush_small, getString(R.string.brush_small)),
+            BasicGridItem(R.drawable.brush_medium, getString(R.string.brush_medium)),
+            BasicGridItem(R.drawable.brush_large, getString(R.string.brush_large))
+        )
+
+        MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+            title(R.string.dialog_choose_brush_size)
+            gridItems(sizes) { _, index, _ ->
+                when (index) {
+                    0 -> binding.drawingView.setBrushSize(5F)
+                    1 -> binding.drawingView.setBrushSize(10F)
+                    2 -> binding.drawingView.setBrushSize(20F)
+                }
+            }
+        }
+    }
+
+    private fun requestImage() {
+        try {
+            val pickPhotoIntent = Intent(
+                Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            )
+            startActivityForResult(pickPhotoIntent, Constants.GALLERY)
+        } catch (e: Exception) {
+            snackBarMsg(requireView(), getString(R.string.gallery_not_available))
+        }
+    }
+
+    private fun saveBitmap() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            binding.drawingView.saveBitmap(binding.drawingView.getBitmap(flDrawingViewContainer))
+            snackBarMsg(requireView(), getString(R.string.drawing_saved))
         }
     }
 }

@@ -2,17 +2,17 @@
     android:width="24dp"
     android:height="24dp"
     android:autoMirrored="true"
-    android:tint="?attr/colorControlNormal"
+    android:tint="@color/iconColor"
     android:viewportWidth="24"
     android:viewportHeight="24">
     <path
-        android:fillColor="@android:color/white"
+        android:fillColor="@color/iconColor"
         android:pathData="M20.71,4.63L19.37,3.29C19,2.9 18.35,2.9 17.96,3.29L9,12.25L11.75,15L20.71,6.04C21.1,5.65 21.1,5 20.71,4.63M7,14A3,3 0,0 0,4 17C4,18.31 2.84,19 2,19C2.92,20.22 4.5,21 6,21A4,4 0,0 0,10 17A3,3 0,0 0,7 14Z" />
     <path
-        android:fillColor="@android:color/white"
+        android:fillColor="@color/iconColor"
         android:pathData="m18.4213,23.4756 l5.0534,-4.3415v4.3415z"
         android:strokeWidth="1.04735959"
-        android:strokeColor="@android:color/white"
+        android:strokeColor="@color/iconColor"
         android:strokeLineCap="butt"
         android:strokeLineJoin="miter" />
 </vector>

@@ -4,8 +4,9 @@
     <color name="primaryDarkColor">#F94867</color>
     <color name="primaryTextColor">#FFFFFF</color>
     <color name="secondaryTextColor">#151515</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="iconColor">#353535</color>
     <color name="backgroundColor">#FFFFFF</color>
+    <color name="ScrollMoveBgColor">#33F94867</color>
 
     <!-- Brush Palette -->
     <color name="beige">#ffcc99</color>

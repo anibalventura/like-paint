@@ -6,5 +6,6 @@
     <color name="secondaryTextColor">#FFFFFF</color>
     <color name="iconColor">#FFFFFF</color>
     <color name="backgroundColor">#282C34</color>
+    <color name="drawingBorderColor">#282C34</color>
     <color name="ScrollMoveBgColor">#474A52</color>
 </resources>

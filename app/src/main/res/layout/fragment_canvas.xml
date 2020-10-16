@@ -49,16 +49,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvToolsPanel"
+            style="@style/CardViewTheme"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@color/backgroundColor"
-            app:cardBackgroundColor="@color/backgroundColor"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,101 +82,69 @@
 
                         <ImageButton
                             android:id="@+id/ibBrushSize"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            style="@style/ToolsButtonTheme"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="4dp"
-                            android:background="@android:color/transparent"
                             android:contentDescription="@string/brush_button"
                             android:longClickable="true"
                             android:onClick="@{() -> canvas.brush()}"
-                            android:padding="8dp"
-                            android:scaleType="fitXY"
                             android:src="@drawable/ic_brush" />
 
                         <ImageButton
                             android:id="@+id/ibEraseDraw"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            style="@style/ToolsButtonTheme"
                             android:layout_marginEnd="4dp"
-                            android:background="@android:color/transparent"
                             android:contentDescription="@string/erase_draw_button"
                             android:longClickable="true"
                             android:onClick="@{() -> canvas.eraser()}"
-                            android:padding="8dp"
-                            android:scaleType="fitXY"
                             android:src="@drawable/ic_eraser" />
 
                         <ImageButton
                             android:id="@+id/ibUndoDraw"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            style="@style/ToolsButtonTheme"
                             android:layout_marginEnd="4dp"
-                            android:background="@android:color/transparent"
                             android:contentDescription="@string/undo_draw_button"
                             android:onClick="@{() -> drawing.undoPath()}"
-                            android:padding="8dp"
-                            android:scaleType="fitXY"
                             android:src="@drawable/ic_undo" />
 
                         <ImageButton
                             android:id="@+id/ibRedoDraw"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            style="@style/ToolsButtonTheme"
                             android:layout_marginEnd="4dp"
-                            android:background="@android:color/transparent"
                             android:contentDescription="@string/redo_draw_button"
                             android:onClick="@{() -> drawing.redoPath()}"
-                            android:padding="8dp"
-                            android:scaleType="fitXY"
                             android:src="@drawable/ic_redo" />
 
                         <ImageButton
                             android:id="@+id/ibBrushColor"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            style="@style/ToolsButtonTheme"
                             android:layout_marginEnd="4dp"
-                            android:background="@android:color/transparent"
                             android:contentDescription="@string/brush_color_button"
                             android:onClick="@{() -> canvas.brushColor()}"
-                            android:padding="8dp"
-                            android:scaleType="fitXY"
                             android:src="@drawable/ic_palette" />
 
                         <ImageButton
                             android:id="@+id/ibBackgroundImage"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            style="@style/ToolsButtonTheme"
                             android:layout_marginEnd="4dp"
-                            android:background="@android:color/transparent"
                             android:contentDescription="@string/background_image_button"
                             android:onClick="@{() -> canvas.imageBackground()}"
-                            android:padding="8dp"
-                            android:scaleType="fitXY"
                             android:src="@drawable/ic_image" />
 
                         <ImageButton
                             android:id="@+id/ibClearCanvas"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            style="@style/ToolsButtonTheme"
                             android:layout_marginEnd="4dp"
-                            android:background="@android:color/transparent"
                             android:contentDescription="@string/brush_color_button"
                             android:onClick="@{() -> drawing.clearDrawing()}"
-                            android:padding="8dp"
-                            android:scaleType="fitXY"
                             android:src="@drawable/ic_clear" />
 
                         <ImageButton
                             android:id="@+id/ibShareDrawing"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            style="@style/ToolsButtonTheme"
                             android:layout_marginEnd="4dp"
-                            android:background="@android:color/transparent"
                             android:contentDescription="@string/share_drawing_button"
                             android:onClick="@{() -> canvas.shareDrawing()}"
-                            android:padding="8dp"
-                            android:scaleType="fitXY"
                             android:src="@drawable/ic_share" />
 
                     </LinearLayout>
@@ -187,13 +152,10 @@
 
                 <ImageButton
                     android:id="@+id/ibMoveRight"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    style="@style/ToolsButtonTheme"
                     android:background="@color/ScrollMoveBgColor"
                     android:contentDescription="@string/arrow_right_button"
                     android:onClick="@{() -> canvas.moveScroll(0)}"
-                    android:padding="8dp"
-                    android:scaleType="fitXY"
                     android:src="@drawable/ic_arrow_right"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -202,13 +164,10 @@
 
                 <ImageButton
                     android:id="@+id/ibMoveLeft"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    style="@style/ToolsButtonTheme"
                     android:background="@color/ScrollMoveBgColor"
                     android:contentDescription="@string/arrow_right_button"
                     android:onClick="@{() -> canvas.moveScroll(1)}"
-                    android:padding="8dp"
-                    android:scaleType="fitXY"
                     android:src="@drawable/ic_arrow_left"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"

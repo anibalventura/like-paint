@@ -6,6 +6,7 @@
     <color name="secondaryTextColor">#151515</color>
     <color name="iconColor">#353535</color>
     <color name="backgroundColor">#FFFFFF</color>
+    <color name="drawingBorderColor">#B4B4B4</color>
     <color name="ScrollMoveBgColor">#33F94867</color>
 
     <!-- Brush Palette -->

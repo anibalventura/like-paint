@@ -6,5 +6,5 @@
         android:width="30dp"
         android:height="30dp" />
 
-    <solid android:color="@android:color/black" />
+    <solid android:color="@color/secondaryTextColor" />
 </shape>

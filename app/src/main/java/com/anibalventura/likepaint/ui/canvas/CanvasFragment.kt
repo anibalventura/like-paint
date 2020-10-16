@@ -132,7 +132,7 @@ class CanvasFragment : Fragment() {
         binding.drawingView.setBrushColor(brushColor)
 
         binding.ibBrushSize.setOnLongClickListener {
-            showBrushSizeDialog()
+            showBrushSizeDialog(false)
             binding.drawingView.setBrushColor(brushColor)
             return@setOnLongClickListener true
         }
@@ -142,7 +142,7 @@ class CanvasFragment : Fragment() {
         binding.drawingView.setBrushColor(Color.WHITE)
 
         binding.ibEraseDraw.setOnLongClickListener {
-            showBrushSizeDialog()
+            showBrushSizeDialog(true)
             binding.drawingView.setBrushColor(Color.WHITE)
             return@setOnLongClickListener true
         }
@@ -216,7 +216,7 @@ class CanvasFragment : Fragment() {
 
     /* ===================================== Tools Panel Utils ===================================== */
 
-    private fun showBrushSizeDialog() {
+    private fun showBrushSizeDialog(eraser: Boolean) {
         val sizes = listOf(
             BasicGridItem(R.drawable.brush_small, getString(R.string.brush_small)),
             BasicGridItem(R.drawable.brush_medium, getString(R.string.brush_medium)),
@@ -224,7 +224,11 @@ class CanvasFragment : Fragment() {
         )
 
         MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-            title(R.string.dialog_choose_brush_size)
+            when (eraser) {
+                true -> title(R.string.dialog_choose_eraser_size)
+                else -> title(R.string.dialog_choose_brush_size)
+            }
+
             gridItems(sizes) { _, index, _ ->
                 when (index) {
                     0 -> binding.drawingView.setBrushSize(5F)

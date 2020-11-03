@@ -31,17 +31,13 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
     }
 
     private fun setupToolbar() {
-        // Set the toolbar.
         setSupportActionBar(toolbar)
-        // Update toolbar title.
         this.title = getString(R.string.option_settings)
-        // Set navigateUp button.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     // Automatic implement changes on preferences.
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        // Update theme selected.
         setupTheme(this)
     }
 

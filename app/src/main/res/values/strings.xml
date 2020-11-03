@@ -44,4 +44,7 @@
     <string name="about_changelog_title">Changelog</string>
     <string name="about_changelog_v100_title" translatable="false">v 1.0.0</string>
     <string name="about_changelog_v100_content">- First release.</string>
+    <string name="dialog_exit">Exit without save?</string>
+    <string name="dialog_exit_confirmation">Exit</string>
+    <string name="dialog_exit_message">If you exit the app now, your drawing won\'t be saved.</string>
 </resources>

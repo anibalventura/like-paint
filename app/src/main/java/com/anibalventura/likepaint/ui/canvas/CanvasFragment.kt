@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.*
 import android.widget.HorizontalScrollView
+import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -29,6 +30,9 @@ import com.anibalventura.likepaint.utils.Constants.STORAGE_PERMISSION_CODE
 import com.anibalventura.likepaint.utils.shareText
 import com.anibalventura.likepaint.utils.snackBarMsg
 import kotlinx.android.synthetic.main.fragment_canvas.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class CanvasFragment : Fragment() {
@@ -42,11 +46,9 @@ class CanvasFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
-        // Inflate the layout for requireContext() fragment.
         _binding = FragmentCanvasBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
 
-        // Setup layout variables.
         binding.canvas = this
         binding.drawing = binding.drawingView
 
@@ -55,6 +57,7 @@ class CanvasFragment : Fragment() {
         brush()
 
         setHasOptionsMenu(true)
+        onBackPressed()
 
         return binding.root
     }
@@ -108,6 +111,11 @@ class CanvasFragment : Fragment() {
             R.id.option_about -> findNavController().navigate(R.id.action_canvasFragment_to_aboutFragment)
             R.id.option_settings -> findNavController().navigate(R.id.settingsActivity)
         }
+
+//        return NavigationUI.onNavDestinationSelected(
+//            item, requireView().findNavController()
+//        ) || super.onOptionsItemSelected(item)
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -256,5 +264,39 @@ class CanvasFragment : Fragment() {
             binding.drawingView.saveBitmap(binding.drawingView.getBitmap(flDrawingViewContainer))
             snackBarMsg(requireView(), getString(R.string.drawing_saved))
         }
+    }
+
+    /* ===================================== On app exit. ===================================== */
+
+    private fun onBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+
+                    MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+                        title(R.string.dialog_exit)
+                        message(R.string.dialog_exit_message)
+
+                        positiveButton(R.string.option_save_drawing) {
+                            saveDrawing()
+
+                            GlobalScope.launch(Dispatchers.Main) {
+                                delay(1500L)
+                                if (isEnabled) {
+                                    isEnabled = false
+                                    requireActivity().onBackPressed()
+                                }
+                            }
+                        }
+                        negativeButton(R.string.dialog_exit_confirmation) {
+                            if (isEnabled) {
+                                isEnabled = false
+                                requireActivity().onBackPressed()
+                            }
+                        }
+                    }
+                }
+            }
+        )
     }
 }

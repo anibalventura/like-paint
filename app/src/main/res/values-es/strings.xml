@@ -42,4 +42,7 @@
     <string name="about_changelog_title">Registro de Cambios</string>
     <string name="about_changelog_v100_content">- Lanzamiento inicial.</string>
     <string name="dialog_choose_eraser_size">Elegir tamaño del borrador</string>
+    <string name="dialog_exit">¿Salir sin guardar?</string>
+    <string name="dialog_exit_confirmation">Salir</string>
+    <string name="dialog_exit_message">Si sales ahora, tu dibujo no se guardará.</string>
 </resources>

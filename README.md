@@ -5,7 +5,7 @@
 
 Simple drawing app with an intuitive user interface based on modern Android application tech-stacks.
 
-<!-- <a href="https://play.google.com/store/apps/details?id=com.anibalventura.likepaint"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="75"></a> -->
+<a href="https://play.google.com/store/apps/details?id=com.anibalventura.likepaint"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="75"></a>
 
 ## Features
 * Change brush size and color.
